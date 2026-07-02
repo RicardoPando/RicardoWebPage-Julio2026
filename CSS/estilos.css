@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background: #F5F5F5;
+}
+
+/* Estilos para el conmutador */
+.switch-container {
+    /* quitarlo para que no este en el centro */
+    /* float: left; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+#logo-upc {
+    width: 5em; 
+    height: 5em;
+}
+
+.switch-label {
+    margin-right: 10px;
+}
+
+.switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    appearance: none;
+    background-color: #ccc;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.switch::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: transform 0.3s;
+}
+
+/* Estilos para el modo claro (light mode) */
+body.light-mode {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Estilos para el modo oscuro (dark mode) */
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Cambiar estilos del conmutador en el modo oscuro */
+body.dark-mode .switch {
+    background-color: #444;
+}
+
+body.dark-mode .switch::before {
+    transform: translateX(20px);
+}
+
+#nombre-Apellido{
+    text-align: center;
+    padding-top: 1em;
+}
+
+@keyframes brillo {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+#toggleButton 
+{
+    animation: brillo 2s infinite;
+    width: 18em; /* Ajusta el valor según sea necesario */
+    height: auto; /* Mantiene la proporción original de la imagen */
+}
+
+#SeccionContacto {
+    display: none;
+    text-align: center;
+    margin-bottom: 10px
+}
+
+#SeccionContacto label,
+#SeccionContacto input,
+#SeccionContacto textarea {
+    margin-bottom: 10px;
+}
+
+
+.titulos h1{
+    font-size: 2em;
+}
+.titulos h2{
+    font-size: 1em;
+}
+
+.conocimientoInformatica p{
+padding: 1em;
+}
+
+#idiomas p
+{
+    padding: 1em;
+}
+
+#cursos p
+{
+    padding: 1em;
+}
+/* Menu para mobile */
+#icon_menu{
+    display: none;
+}
+.mostrar_menu{ /*CLASE MANIPULADA POR JS*/
+    height: 235px;
+}
+
+.Menu nav ul{
+    padding: 20px 0px;
+    /* flex-direction: column; */
+    display: flex;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.Menu nav ul li{
+    list-style: none;
+    padding: 0px 20px;
+} 
+
+.Menu nav ul li a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #000;
+    transition: opacity 300ms;
+}
+
+.Menu nav ul li a:hover{
+    opacity: 0.6;
+}
+
+.contenidoCV
+{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.contenidoCV section
+{
+    padding-bottom: 1.2em;
+}
+
+.contenidoCV h2
+{
+    font-size: 1.1em;
+}
+
+#resumenGeneral p
+{
+    text-align: justify;
+}
+
+
+#exportarPDF li{
+    padding: 20px 0px;
+    /* flex-direction: column; */
+    display: flex;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+
+
+@media (max-width: 1024px){
+
+/* Menu para mobile */
+#icon_menu{
+    /* float: right; */
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    font-size: large;
+    transform: translateX(-15px);
+    fill: #fff;
+}
+
+.Menu{
+    height: 0px;
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0px 0px 30px -20px rgba(0,0,0,0.5);
+    transition: all 300ms;
+}
+.mostrar_menu{ /*CLASE MANIPULADA POR JS*/
+    height: 235px;
+}
+
+.Menu nav ul{
+    padding: 20px 0px;
+    flex-direction: column;
+    background: #fff;
+}
+.Menu nav ul li{
+    padding: 10px 40px;
+}
+}
