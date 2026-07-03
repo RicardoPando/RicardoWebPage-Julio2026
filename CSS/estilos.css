@@ -269,3 +269,26 @@ padding: 1em;
     transform: scale(1.05);
     filter: brightness(1.1); /* Lo ilumina un poco al hacer hover */
 }
+
+/* --- Estilos para redondear las cajas de texto del formulario --- */
+#whatsappForm input[type="text"],
+#whatsappForm input[type="email"],
+#whatsappForm textarea {
+    border-radius: 8px; /* Redondea las esquinas */
+    border: 1px solid #ccc; /* Agrega un borde sutil y limpio */
+    padding: 10px 12px; /* Da espacio interior para que el texto respire */
+    width: 80%; /* Ajusta el ancho para que se vean uniformes */
+    max-width: 300px; /* Limita el ancho máximo */
+    box-sizing: border-box; /* Asegura que el padding no rompa el tamaño */
+    font-size: 14px;
+    outline: none; /* Quita el borde negro por defecto al hacer clic */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto visual cuando el usuario hace clic dentro de la caja de texto */
+#whatsappForm input[type="text"]:focus,
+#whatsappForm input[type="email"]:focus,
+#whatsappForm textarea:focus {
+    border-color: #129c17; /* El borde se pinta del verde de WhatsApp */
+    box-shadow: 0 0 5px rgba(18, 156, 23, 0.3); /* Ligero resplandor verde */
+}

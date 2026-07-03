@@ -13,6 +13,7 @@ function toggleDarkMode() {
 
 // Obtener la preferencia de modo almacenada en localStorage
 const savedMode = localStorage.getItem('dark-mode');
+
 if (savedMode === 'enabled') {
     document.body.classList.add('dark-mode');
 }
@@ -23,6 +24,7 @@ modeSwitch.addEventListener('change', toggleDarkMode);
 
 // Selecciona el elemento de etiqueta (label) por su ID
 const modeSwitchLabel = document.querySelector('.switch-label');
+
 // Agrega un evento de escucha al cambio del interruptor
 document.querySelector('#mode-switch').addEventListener('change', function() {
   // Verifica si el interruptor está activado o desactivado
@@ -33,7 +35,7 @@ document.querySelector('#mode-switch').addEventListener('change', function() {
     menu.style.color = 'black'; 
 
     const barras_menu = document.getElementById('icon_menu'); // Obtén el elemento SVG por su ID
-    // Luego, puedes acceder a los elementos rect dentro del SVG utilizando querySelectorAll
+// Luego, puedes acceder a los elementos rect dentro del SVG utilizando querySelectorAll
     const rects = barras_menu.querySelectorAll('rect');
     // Ahora, puedes trabajar con los elementos rects como una colección NodeList
     // Por ejemplo, cambiar su color de fondo a blanco
@@ -42,45 +44,42 @@ document.querySelector('#mode-switch').addEventListener('change', function() {
     });
 
     const logoUPC = document.getElementById('logo-upc'); // Obtén el elemento SVG por su ID
-    const pathElement = logoUPC.querySelector('path');
-    // Obtén el elemento <path> dentro del SVG
+    const pathElement = logoUPC.querySelector('path'); // Obtén el elemento <path> dentro del SVG
 
     // Cambia el color de relleno a blanco
     pathElement.setAttribute('fill', 'white');
+
     const svgElement = document.getElementById('imagenExporPDF'); // Obtén el elemento SVG por su ID
-    const paths = svgElement.querySelectorAll('path');
-    // Obtén todas las rutas dentro del SVG
+    const paths = svgElement.querySelectorAll('path'); // Obtén todas las rutas dentro del SVG
     
     // Itera a través de las rutas y cambia su color de relleno a blanco
     for (let i = 0; i < paths.length; i++) {
         paths[i].setAttribute('fill', 'white');
     }
-
   } else {
     // Cambia el contenido del elemento a "☀️" cuando está desactivado
     modeSwitchLabel.textContent = "☀️";
     const barras_menu = document.getElementById('icon_menu'); // Obtén el elemento SVG por su ID
     // Luego, puedes acceder a los elementos rect dentro del SVG utilizando querySelectorAll
-    const rects = barras_menu.querySelectorAll('rect');
-    // Ahora, puedes trabajar con los elementos rects como una colección NodeList
-    // Por ejemplo, cambiar su color de fondo a blanco
-    rects.forEach(rect => {
-        rect.setAttribute('fill', 'black');
-    });
-    const logoUPC = document.getElementById('logo-upc'); // Obtén el elemento SVG por su ID
-    const pathElement = logoUPC.querySelector('path');
-    // Obtén el elemento <path> dentro del SVG
+        const rects = barras_menu.querySelectorAll('rect');
+        // Ahora, puedes trabajar con los elementos rects como una colección NodeList
+        // Por ejemplo, cambiar su color de fondo a blanco
+        rects.forEach(rect => {
+            rect.setAttribute('fill', 'black');
+        });
+        const logoUPC = document.getElementById('logo-upc'); // Obtén el elemento SVG por su ID
+        const pathElement = logoUPC.querySelector('path'); // Obtén el elemento <path> dentro del SVG
           
-    // Cambia el color de relleno a blanco
-    pathElement.setAttribute('fill', 'black');
-    const svgElement = document.getElementById('imagenExporPDF'); // Obtén el elemento SVG por su ID
-    const paths = svgElement.querySelectorAll('path');
-    // Obtén todas las rutas dentro del SVG
+        // Cambia el color de relleno a blanco
+        pathElement.setAttribute('fill', 'black');
+
+        const svgElement = document.getElementById('imagenExporPDF'); // Obtén el elemento SVG por su ID
+        const paths = svgElement.querySelectorAll('path'); // Obtén todas las rutas dentro del SVG
         
-    // Itera a través de las rutas y cambia su color de relleno a blanco
-    for (let i = 0; i < paths.length; i++) {
-        paths[i].setAttribute('fill', 'black');
-    }
+        // Itera a través de las rutas y cambia su color de relleno a blanco
+        for (let i = 0; i < paths.length; i++) {
+            paths[i].setAttribute('fill', 'black');
+        }
   }
 });
 
@@ -93,6 +92,8 @@ function mostrar_menu(){
 document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("toggleButton");
     var seccion = document.getElementById("SeccionContacto");
+    // Nota: Es posible que estos selectores de label/input/textarea necesiten 
+    // ajustes dependiendo de si devuelven null, pero se mantiene la lógica original
     var label = document.getElementById("SeccionContacto label");
     var input = document.getElementById("SeccionContacto input");
     var textarea = document.getElementById("SeccionContacto textarea");
@@ -101,14 +102,23 @@ document.addEventListener("DOMContentLoaded", function() {
       // Alternar la visibilidad de la sección
       if (seccion.style.display === "none" || seccion.style.display === "") {
         seccion.style.display = "block";
-        label.style.display = "block";
-        input.style.display = "block";
-        textarea.style.display = "block";
+        if (label) label.style.display = "block";
+        if (input) input.style.display = "block";
+        if (textarea) textarea.style.display = "block";
+        
+        // --- NUEVO CÓDIGO: Desplazamiento suave hacia el formulario ---
+        setTimeout(function() {
+            seccion.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'end' 
+            });
+        }, 100);
+
       } else {
         seccion.style.display = "none";
-        label.style.display = "none";
-        input.style.display = "none";
-        textarea.style.display = "none";
+        if (label) label.style.display = "none";
+        if (input) input.style.display = "none";
+        if (textarea) textarea.style.display = "none";
       }
     });
 
