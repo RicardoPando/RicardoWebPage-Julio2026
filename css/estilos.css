@@ -134,7 +134,8 @@ padding: 1em;
     display: none;
 }
 .mostrar_menu{ /*CLASE MANIPULADA POR JS*/
-    height: 235px;
+    height: auto;
+    max-height: 500px;
 }
 
 .Menu nav ul{
@@ -238,7 +239,8 @@ padding: 1em;
 }
 
 .Menu{
-    height: 0px;
+    height: auto;
+    max-height: 0px;
     position: absolute;
     right: 20px;
     top: 70px;
@@ -248,7 +250,7 @@ padding: 1em;
     transition: all 300ms;
 }
 .mostrar_menu{ /*CLASE MANIPULADA POR JS*/
-    height: 235px;
+    max-height: 500px;
 }
 
 .Menu nav ul{
