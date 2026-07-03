@@ -13,7 +13,6 @@ function toggleDarkMode() {
 
 // Obtener la preferencia de modo almacenada en localStorage
 const savedMode = localStorage.getItem('dark-mode');
-
 if (savedMode === 'enabled') {
     document.body.classList.add('dark-mode');
 }
@@ -24,7 +23,6 @@ modeSwitch.addEventListener('change', toggleDarkMode);
 
 // Selecciona el elemento de etiqueta (label) por su ID
 const modeSwitchLabel = document.querySelector('.switch-label');
-
 // Agrega un evento de escucha al cambio del interruptor
 document.querySelector('#mode-switch').addEventListener('change', function() {
   // Verifica si el interruptor está activado o desactivado
@@ -35,7 +33,7 @@ document.querySelector('#mode-switch').addEventListener('change', function() {
     menu.style.color = 'black'; 
 
     const barras_menu = document.getElementById('icon_menu'); // Obtén el elemento SVG por su ID
-// Luego, puedes acceder a los elementos rect dentro del SVG utilizando querySelectorAll
+    // Luego, puedes acceder a los elementos rect dentro del SVG utilizando querySelectorAll
     const rects = barras_menu.querySelectorAll('rect');
     // Ahora, puedes trabajar con los elementos rects como una colección NodeList
     // Por ejemplo, cambiar su color de fondo a blanco
@@ -44,57 +42,52 @@ document.querySelector('#mode-switch').addEventListener('change', function() {
     });
 
     const logoUPC = document.getElementById('logo-upc'); // Obtén el elemento SVG por su ID
-    const pathElement = logoUPC.querySelector('path'); // Obtén el elemento <path> dentro del SVG
+    const pathElement = logoUPC.querySelector('path');
+    // Obtén el elemento <path> dentro del SVG
 
     // Cambia el color de relleno a blanco
     pathElement.setAttribute('fill', 'white');
-
     const svgElement = document.getElementById('imagenExporPDF'); // Obtén el elemento SVG por su ID
-    const paths = svgElement.querySelectorAll('path'); // Obtén todas las rutas dentro del SVG
+    const paths = svgElement.querySelectorAll('path');
+    // Obtén todas las rutas dentro del SVG
     
     // Itera a través de las rutas y cambia su color de relleno a blanco
     for (let i = 0; i < paths.length; i++) {
         paths[i].setAttribute('fill', 'white');
     }
-    
-
-
-
-
 
   } else {
     // Cambia el contenido del elemento a "☀️" cuando está desactivado
     modeSwitchLabel.textContent = "☀️";
     const barras_menu = document.getElementById('icon_menu'); // Obtén el elemento SVG por su ID
     // Luego, puedes acceder a los elementos rect dentro del SVG utilizando querySelectorAll
-        const rects = barras_menu.querySelectorAll('rect');
-        // Ahora, puedes trabajar con los elementos rects como una colección NodeList
-        // Por ejemplo, cambiar su color de fondo a blanco
-        rects.forEach(rect => {
-            rect.setAttribute('fill', 'black');
-        });
-        const logoUPC = document.getElementById('logo-upc'); // Obtén el elemento SVG por su ID
-        const pathElement = logoUPC.querySelector('path'); // Obtén el elemento <path> dentro del SVG
+    const rects = barras_menu.querySelectorAll('rect');
+    // Ahora, puedes trabajar con los elementos rects como una colección NodeList
+    // Por ejemplo, cambiar su color de fondo a blanco
+    rects.forEach(rect => {
+        rect.setAttribute('fill', 'black');
+    });
+    const logoUPC = document.getElementById('logo-upc'); // Obtén el elemento SVG por su ID
+    const pathElement = logoUPC.querySelector('path');
+    // Obtén el elemento <path> dentro del SVG
           
-        // Cambia el color de relleno a blanco
-        pathElement.setAttribute('fill', 'black');
-
-        const svgElement = document.getElementById('imagenExporPDF'); // Obtén el elemento SVG por su ID
-        const paths = svgElement.querySelectorAll('path'); // Obtén todas las rutas dentro del SVG
+    // Cambia el color de relleno a blanco
+    pathElement.setAttribute('fill', 'black');
+    const svgElement = document.getElementById('imagenExporPDF'); // Obtén el elemento SVG por su ID
+    const paths = svgElement.querySelectorAll('path');
+    // Obtén todas las rutas dentro del SVG
         
-        // Itera a través de las rutas y cambia su color de relleno a blanco
-        for (let i = 0; i < paths.length; i++) {
-            paths[i].setAttribute('fill', 'black');
-        }
+    // Itera a través de las rutas y cambia su color de relleno a blanco
+    for (let i = 0; i < paths.length; i++) {
+        paths[i].setAttribute('fill', 'black');
+    }
   }
 });
 
 document.getElementById("icon_menu").addEventListener("click", mostrar_menu);
 
 function mostrar_menu(){
-
     document.querySelector(".Menu").classList.toggle("mostrar_menu");
-    
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -104,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
     var input = document.getElementById("SeccionContacto input");
     var textarea = document.getElementById("SeccionContacto textarea");
 
-  
     button.addEventListener("click", function() {
       // Alternar la visibilidad de la sección
       if (seccion.style.display === "none" || seccion.style.display === "") {
@@ -119,4 +111,31 @@ document.addEventListener("DOMContentLoaded", function() {
         textarea.style.display = "none";
       }
     });
-  });
+
+    // --- INTEGRACIÓN WHATSAPP ---
+    document.getElementById('whatsappForm').addEventListener('submit', function(event) {
+        // 1. Evitamos que el formulario recargue la página
+        event.preventDefault();
+
+        // 2. Capturamos los valores de los campos
+        const nombre = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const asunto = document.getElementById('subject').value;
+        const comentarios = document.getElementById('comments').value;
+
+        // 3. Estructuramos el mensaje con saltos de línea (\n)
+        const mensaje = `Nombre: ${nombre}\nCorreo: ${email}\nAsunto: ${asunto}\nMensaje:\n${comentarios}`;
+
+        // 4. Codificamos el texto (convierte \n en %0A y espacios en %20)
+        const textoCodificado = encodeURIComponent(mensaje);
+
+        // 5. Definimos el número de teléfono
+        const telefono = "51999772811";
+
+        // 6. Creamos la URL final
+        const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${textoCodificado}`;
+
+        // 7. Abrimos WhatsApp en una nueva pestaña
+        window.open(url, '_blank');
+    });
+});

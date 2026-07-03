@@ -44,18 +44,23 @@ m19 -72 c3 -92 34 -157 112 -232 116 -113 159 -222 140 -357 -11 -75 -65 -188
                         <h2>DNI: 73048323</h2>
                 </section>
 
-<img id="toggleButton" src="./media/botonContacto.png" alt="toggleButton">
+        <img id="toggleButton" src="./media/botonContacto.png" alt="toggleButton">
             <div id="SeccionContacto">
-                <form action="https://formsubmit.co/ricpando95@gmail.com" method="POST">
-                    <label for="Nombre">Nombre</label><br>
-                    <input type="text" name="name"> <br>
-                    <label for="email">Correo Electronico</label><br>
-                    <input type="email" name="email"><br>
+                <form id="whatsappForm">
+                    <label for="name">Nombre</label><br>
+                    <input type="text" name="name" id="name" required> <br>
+                    
+                    <label for="email">Correo Electrónico</label><br>
+                    <input type="email" name="email" id="email" required><br>
+                    
                     <label for="subject">Asunto</label><br>
-                    <input type="text" name="subject"><br>
+                    <input type="text" name="subject" id="subject" required><br>
+                    
                     <label for="comments">Contenido del Mensaje</label><br>
-                    <textarea name="comments" cols="50" rows="5"></textarea><br>
-                    <input type="submit" value="Enviar">
+                    <textarea name="comments" id="comments" cols="50" rows="5" required></textarea><br>
+                    
+                    <input type="submit" value="Enviar por WhatsApp">
+                </form>
             </div>
                 
                 
