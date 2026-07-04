@@ -191,6 +191,37 @@ if (savedMode === 'enabled') {
 const modeSwitch = document.getElementById('mode-switch');
 modeSwitch.addEventListener('change', toggleDarkMode);
 
+// --- INTERRUPTOR DE IDIOMA (ES / EN) ---
+// Este interruptor no tenía ninguna lógica asociada: solo cambiaba
+// visualmente por el bug de CSS, pero no traducía nada. Aquí se agrega
+// la función que realmente aplica el idioma a todos los elementos
+// marcados con data-i18n usando el objeto "traducciones".
+const langSwitch = document.getElementById('lang-switch');
+const langLabel = document.getElementById('lang-label');
+
+function aplicarIdioma(idioma) {
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        const key = el.getAttribute('data-i18n');
+        if (traducciones[idioma] && traducciones[idioma][key] !== undefined) {
+            el.innerHTML = traducciones[idioma][key];
+        }
+    });
+
+    document.documentElement.setAttribute('lang', idioma);
+    langLabel.textContent = idioma.toUpperCase();
+}
+
+// Cargar el idioma guardado en localStorage (por defecto español)
+const savedLang = localStorage.getItem('lang') || 'es';
+langSwitch.checked = savedLang === 'en';
+aplicarIdioma(savedLang);
+
+langSwitch.addEventListener('change', function () {
+    const idioma = this.checked ? 'en' : 'es';
+    localStorage.setItem('lang', idioma);
+    aplicarIdioma(idioma);
+});
+
 // Selecciona el elemento de etiqueta (label) por su ID
 const modeSwitchLabel = document.querySelector('.switch-label');
 

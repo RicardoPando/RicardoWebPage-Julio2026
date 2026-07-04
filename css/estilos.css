@@ -11,6 +11,15 @@ body{
     background: #F5F5F5;
 }
 
+/* Contenedor que agrupa ambos interruptores (modo oscuro e idioma) */
+.switches-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 /* Estilos para el conmutador */
 .switch-container {
     /* quitarlo para que no este en el centro */
@@ -63,13 +72,25 @@ body.dark-mode {
     color: #fff;
 }
 
-/* Cambiar estilos del conmutador en el modo oscuro */
+/* Cada interruptor mueve su propia bolita según SU estado (checked),
+   ya no según si el body tiene la clase dark-mode. Así el switch de
+   idioma ya no se mueve al activar el modo oscuro, y viceversa. */
+.switch:checked::before {
+    transform: translateX(20px);
+}
+
+.switch:checked {
+    background-color: #129c17;
+}
+
+/* Estilo del track del switch cuando el modo oscuro está activo
+   (solo afecta el color de fondo general, no la posición) */
 body.dark-mode .switch {
     background-color: #444;
 }
 
-body.dark-mode .switch::before {
-    transform: translateX(20px);
+body.dark-mode .switch:checked {
+    background-color: #129c17;
 }
 
 #nombre-Apellido{
