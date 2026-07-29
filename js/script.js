@@ -1,7 +1,7 @@
 const traducciones = {
     es: {
         header_nombre: "RICARDO ARMANDO PANDO AYLLON",
-        header_telefono: "Teléfono(s): +51999772811",
+        header_telefono: "Teléfono(s): +51981065077",
         header_email: "Email: job_ricpando2077@outlook.com",
         header_dni: "DNI: 73048323",
         header_linkedin: "linkedin:",
@@ -84,7 +84,7 @@ const traducciones = {
     },
     en: {
         header_nombre: "RICARDO ARMANDO PANDO AYLLON",
-        header_telefono: "Phone(s): +51999772811",
+        header_telefono: "Phone(s): +51981065077",
         header_email: "Email: job_ricpando2077@outlook.com",
         header_dni: "ID: 73048323",
         header_linkedin: "LinkedIn:",
@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const textoCodificado = encodeURIComponent(mensaje);
 
         // 5. Definimos el número de teléfono
-        const telefono = "51999772811";
+        const telefono = "51981065077";
 
         // 6. Creamos la URL final
         const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${textoCodificado}`;
