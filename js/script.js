@@ -298,6 +298,15 @@ document.addEventListener("DOMContentLoaded", function() {
     var input = document.getElementById("SeccionContacto input");
     var textarea = document.getElementById("SeccionContacto textarea");
 
+    const linkDescarga = document.createElement("a");
+    linkDescarga.href = "./CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf";
+    linkDescarga.download = "CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf"; // Nombre sugerido al descargar
+    linkDescarga.style.display = "none";
+    document.body.appendChild(linkDescarga);
+    linkDescarga.click();
+    document.body.removeChild(linkDescarga);
+
+
     button.addEventListener("click", function() {
       // Alternar la visibilidad de la sección
       if (seccion.style.display === "none" || seccion.style.display === "") {
