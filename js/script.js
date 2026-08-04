@@ -1,5 +1,5 @@
 const traducciones = {
-    es: {
+    "🇪🇸": {
         header_nombre: "RICARDO ARMANDO PANDO AYLLON",
         header_telefono: "Teléfono(s): +51981065077",
         header_email: "Email: job_ricpando2077@outlook.com",
@@ -82,7 +82,7 @@ const traducciones = {
         
         exportar_pdf: "Exportar a PDF"
     },
-    en: {
+    "🇬🇧": {
         header_nombre: "RICARDO ARMANDO PANDO AYLLON",
         header_telefono: "Phone(s): +51981065077",
         header_email: "Email: job_ricpando2077@outlook.com",
@@ -212,12 +212,12 @@ function aplicarIdioma(idioma) {
 }
 
 // Cargar el idioma guardado en localStorage (por defecto español)
-const savedLang = localStorage.getItem('lang') || 'es';
-langSwitch.checked = savedLang === 'en';
+const savedLang = localStorage.getItem('lang') || '🇪🇸';
+langSwitch.checked = savedLang === '🇬🇧';
 aplicarIdioma(savedLang);
 
 langSwitch.addEventListener('change', function () {
-    const idioma = this.checked ? 'en' : 'es';
+    const idioma = this.checked ? '🇬🇧' : '🇪🇸';
     localStorage.setItem('lang', idioma);
     aplicarIdioma(idioma);
 });
