@@ -212,7 +212,7 @@ function aplicarIdioma(idioma) {
 }
 
 // Cargar el idioma guardado en localStorage (por defecto español)
-const savedLang = localStorage.getItem('lang') || '🇪🇸';
+const savedLang = localStorage.getItem('lang') || '🇬🇧';
 langSwitch.checked = savedLang === '🇬🇧';
 aplicarIdioma(savedLang);
 
