@@ -298,13 +298,13 @@ document.addEventListener("DOMContentLoaded", function() {
     var input = document.getElementById("SeccionContacto input");
     var textarea = document.getElementById("SeccionContacto textarea");
 
-    const linkDescarga = document.createElement("a");
-    linkDescarga.href = "./CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf";
-    linkDescarga.download = "CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf"; // Nombre sugerido al descargar
-    linkDescarga.style.display = "none";
-    document.body.appendChild(linkDescarga);
-    linkDescarga.click();
-    document.body.removeChild(linkDescarga);
+    // const linkDescarga = document.createElement("a");
+    // linkDescarga.href = "./CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf";
+    // linkDescarga.download = "CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf"; // Nombre sugerido al descargar
+    // linkDescarga.style.display = "none";
+    // document.body.appendChild(linkDescarga);
+    // linkDescarga.click();
+    // document.body.removeChild(linkDescarga);
 
 
     button.addEventListener("click", function() {
@@ -358,3 +358,34 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(url, '_blank');
     });
 });
+// --- INICIO PARCHE: Descarga de CV al scrollear a Estudios ---
+document.addEventListener("DOMContentLoaded", function() {
+    // Intentar encontrar la sección de estudios
+    const sectionEstudios = document.getElementById("estudios") || 
+                            document.querySelector(".estudios") ||
+                            Array.from(document.querySelectorAll("section")).find(el => el.textContent.toLowerCase().includes("estudios"));
+
+    if (sectionEstudios) {
+        let cvDescargado = false;
+        
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !cvDescargado) {
+                cvDescargado = true; // Asegurar que solo se descargue una vez
+                
+                const link = document.createElement('a');
+                link.href = 'CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf';
+                link.download = 'CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                observer.unobserve(sectionEstudios);
+            }
+        }, { threshold: 0.3 });
+
+        observer.observe(sectionEstudios);
+    } else {
+        console.warn("No se encontro la seccion de Estudios. Asegurate de tener un id='estudios' en tu HTML.");
+    }
+});
+// --- FIN PARCHE ---
