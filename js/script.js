@@ -358,34 +358,127 @@ document.addEventListener("DOMContentLoaded", function() {
         window.open(url, '_blank');
     });
 });
-// --- INICIO PARCHE: Descarga de CV al scrollear a Estudios ---
-document.addEventListener("DOMContentLoaded", function() {
-    // Intentar encontrar la sección de estudios
-    const sectionEstudios = document.getElementById("estudios") || 
-                            document.querySelector(".estudios") ||
-                            Array.from(document.querySelectorAll("section")).find(el => el.textContent.toLowerCase().includes("estudios"));
+// // --- INICIO PARCHE: Descarga de CV al scrollear a Estudios ---
+// document.addEventListener("DOMContentLoaded", function() {
+//     // Intentar encontrar la sección de estudios
+//     const sectionEstudios = document.getElementById("estudios") || 
+//                             document.querySelector(".estudios") ||
+//                             Array.from(document.querySelectorAll("section")).find(el => el.textContent.toLowerCase().includes("estudios"));
 
-    if (sectionEstudios) {
-        let cvDescargado = false;
+//     if (sectionEstudios) {
+//         let cvDescargado = false;
         
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !cvDescargado) {
-                cvDescargado = true; // Asegurar que solo se descargue una vez
+//         const observer = new IntersectionObserver((entries) => {
+//             if (entries[0].isIntersecting && !cvDescargado) {
+//                 cvDescargado = true; // Asegurar que solo se descargue una vez
                 
-                const link = document.createElement('a');
-                link.href = 'CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf';
-                link.download = 'CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+//                 const link = document.createElement('a');
+//                 link.href = 'CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf';
+//                 link.download = 'CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf';
+//                 document.body.appendChild(link);
+//                 link.click();
+//                 document.body.removeChild(link);
                 
-                observer.unobserve(sectionEstudios);
-            }
-        }, { threshold: 0.3 });
+//                 observer.unobserve(sectionEstudios);
+//             }
+//         }, { threshold: 0.3 });
 
-        observer.observe(sectionEstudios);
-    } else {
-        console.warn("No se encontro la seccion de Estudios. Asegurate de tener un id='estudios' en tu HTML.");
+//         observer.observe(sectionEstudios);
+//     } else {
+//         console.warn("No se encontro la seccion de Estudios. Asegurate de tener un id='estudios' en tu HTML.");
+//     }
+// });
+// // --- FIN PARCHE ---
+
+// Lógica del Pop-up de Descarga
+document.addEventListener("DOMContentLoaded", () => {
+    const seccionEstudios = document.getElementById("estudios");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupPaso1 = document.getElementById("popupPaso1");
+    const popupPaso2 = document.getElementById("popupPaso2");
+    
+    const btnLuego = document.getElementById("btnLuego");
+    const btnDescargar = document.getElementById("btnDescargar");
+    const btnEs = document.getElementById("btnEs");
+    const btnEn = document.getElementById("btnEn");
+
+    let popupMostrado = false;
+
+    const opcionesObserver = {
+        root: null,
+        threshold: 0.3
+    };
+
+    const mostrarPopup = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !popupMostrado) {
+                if(popupOverlay) popupOverlay.classList.add("mostrar");
+                popupMostrado = true;
+            }
+        });
+    };
+
+    if (seccionEstudios) {
+        const observer = new IntersectionObserver(mostrarPopup, opcionesObserver);
+        observer.observe(seccionEstudios);
+    }
+
+    if (btnLuego) {
+        btnLuego.addEventListener("click", () => {
+            popupOverlay.classList.remove("mostrar");
+        });
+    }
+
+    if (btnDescargar) {
+        btnDescargar.addEventListener("click", () => {
+            popupPaso1.classList.add("oculto");
+            popupPaso2.classList.remove("oculto");
+        });
+    }
+
+    const ejecutarDescarga = (nombreArchivo) => {
+        const link = document.createElement("a");
+        link.href = nombreArchivo; 
+        link.download = nombreArchivo;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        popupOverlay.classList.remove("mostrar");
+    };
+
+    if (btnEs) {
+        btnEs.addEventListener("click", () => {
+            ejecutarDescarga("CV_RICARDO_ARMANDO_PANDO_AYLLON_1_es.pdf");
+        });
+    }
+
+    if (btnEn) {
+        btnEn.addEventListener("click", () => {
+            ejecutarDescarga("CV_RICARDO_ARMANDO_PANDO_AYLLON_1_en.pdf");
+        });
     }
 });
-// --- FIN PARCHE ---
+
+
+// Lógica para el botón "Export to PDF"
+document.addEventListener("DOMContentLoaded", () => {
+    const btnExportPDF = document.getElementById("btnExportPDF");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupPaso1 = document.getElementById("popupPaso1");
+    const popupPaso2 = document.getElementById("popupPaso2");
+
+    if (btnExportPDF && popupOverlay && popupPaso1 && popupPaso2) {
+        btnExportPDF.addEventListener("click", (e) => {
+            e.preventDefault(); // Evita que la página salte
+            
+            // Mostrar el fondo oscuro del pop-up
+            popupOverlay.classList.add("mostrar");
+            
+            // Ocultar la pregunta de "Luego/Descargar" (Paso 1)
+            popupPaso1.classList.add("oculto");
+            
+            // Mostrar directamente la selección de idioma (Paso 2)
+            popupPaso2.classList.remove("oculto");
+        });
+    }
+});

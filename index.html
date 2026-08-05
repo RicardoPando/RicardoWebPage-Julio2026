@@ -185,7 +185,7 @@
             </section>
 
             <div id="exportarPDF">
-                <a href="./CV_RICARDO_ARMANDO_PANDO_AYLLON_1.pdf">
+                <a href="#" id="btnExportPDF">
                     <li data-i18n="exportar_pdf">Exportar a PDF</li>
                     
                 </a>
@@ -193,5 +193,27 @@
         </div>
         
         <script src="js/script.js"></script>
-    </body>
+    
+<!-- Pop-up de Descarga de CV -->
+<div id="popupOverlay" class="popup-overlay">
+    <!-- Paso 1: Pregunta inicial -->
+    <div id="popupPaso1" class="popup-content">
+        <h3>¿Descargar la versión de pdf?</h3>
+        <div class="popup-buttons">
+            <button id="btnLuego" class="btn-secundario">Luego</button>
+            <button id="btnDescargar" class="btn-primario">Descargar</button>
+        </div>
+    </div>
+    
+    <!-- Paso 2: Selección de idioma (Oculto por defecto) -->
+    <div id="popupPaso2" class="popup-content oculto">
+        <h3>Seleccione la versión</h3>
+        <div class="popup-buttons">
+            <button id="btnEs" class="btn-primario">Español</button>
+            <button id="btnEn" class="btn-primario">English</button>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
